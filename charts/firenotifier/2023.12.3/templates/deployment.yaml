@@ -3,140 +3,92 @@ apiVersion: {{ template "common.capabilities.deployment.apiVersion" . }}
 kind: Deployment
 metadata:
   name: {{ template "common.names.fullname" . }}
-  labels: {{ include "common.labels" . | nindent 4 }}
+  labels:
+    app: {{ template "common.names.name" . }}
+    chart: {{ template "common.names.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+  annotations:
+    rollme: {{ randAlphaNum 5 | quote }}
 spec:
+  replicas: {{ (default 1 .Values.replicas) }}
   strategy:
-    type: {{ .Values.updateStrategy }}
+    type: "Recreate"
   selector:
-    matchLabels: {{ include "common.labels.selectorLabels" . | nindent 6 }}
+    matchLabels:
+      app: {{ template "common.names.name" . }}
+      release: {{ .Release.Name }}
   template:
     metadata:
       name: {{ template "common.names.fullname" . }}
-      labels: {{ include "common.labels.selectorLabels" . | nindent 8 }}
+      labels:
+        app: {{ template "common.names.name" . }}
+        release: {{ .Release.Name }}
+        {{- include "common.labels.selectorLabels" . | nindent 8 }}
+      annotations: {{ include "common.annotations" . | nindent 8 }}
     spec:
+      hostNetwork: {{ .Values.hostNetwork }}
+      hostname: {{ .Release.Name }}
       containers:
-        {{ if .Values.certificate }}
-        - name: {{ .Chart.Name }}-nginx
-          image: {{ printf "%s:%s" .Values.nginx.image.repository .Values.nginx.image.tag }}
-          imagePullPolicy: {{ .Values.nginx.image.pullPolicy }}
-          volumeMounts:
-            - name: configuration
-              mountPath: /etc/nginx/nginx.conf
-              readOnly: true
-              subPath: config
-            - name: certs
-              mountPath: /etc/nginx/server.crt
-              subPath: certPublicKey
-            - name: certs
-              mountPath: /etc/nginx/server.key
-              subPath: certPrivateKey
+        - name: {{ .Chart.Name }}
+          {{ include "common.resources.limitation" . | nindent 10 }}
+          {{ include "common.containers.imageConfig" .Values.image | nindent 10 }}
+          volumeMounts: {{ include "common.storage.configureAppVolumeMountsInContainer" .Values | nindent 12 }}
+          {{ range $index, $hostPathConfiguration := .Values.extraAppVolumeMounts }}
+            - name: extrappvolume-{{ $index }}
+              mountPath: {{ $hostPathConfiguration.mountPath }}
+          {{ end }}
           ports:
-          - name: http
-            containerPort: 80
-            protocol: TCP
-          - name: https
-            containerPort: 443
-            protocol: TCP
-          livenessProbe:
-            httpGet:
-              scheme: HTTPS
-              path: /robots.txt
-              port: 443
-            initialDelaySeconds: 10
-            periodSeconds: 10
-            timeoutSeconds: 5
-            failureThreshold: 5
-            successThreshold: 1
+            - name: http
+              protocol: TCP
+              containerPort: 8000
+            {{- if .Values.hostNetwork }}
+              hostPort: {{ .Values.firenotifierServiceHTTP.port }}
+            {{- else }}
+              hostPort: null
+            {{- end }}
+            - name: https
+              protocol: TCP
+              containerPort: 8008
+            {{- if .Values.hostNetwork }}
+              hostPort: {{ .Values.firenotifierServiceHTTPS.port }}
+            {{- else }}
+              hostPort: null
+            {{- end }}
           readinessProbe:
             httpGet:
-              scheme: HTTPS
-              path: /robots.txt
-              port: 443
+              path: /api/data
+              port: 8008
             initialDelaySeconds: 10
             periodSeconds: 10
             timeoutSeconds: 5
             failureThreshold: 5
             successThreshold: 2
+          livenessProbe:
+            httpGet:
+              path: /api/data
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 5
+            successThreshold: 1
           startupProbe:
             httpGet:
-              scheme: HTTPS
-              path: /robots.txt
-              port: 443
+              path: /api/data
+              port: 8000
             initialDelaySeconds: 10
             periodSeconds: 5
             timeoutSeconds: 2
             failureThreshold: 60
             successThreshold: 1
-        {{ end }}
-        - name: {{ .Chart.Name }}
-          {{ include "common.resources.limitation" . | nindent 10 }}
-          {{ include "common.containers.imageConfig" .Values.image | nindent 10 }}
-          {{ if .Values.extraAppVolumeMounts }}
-          volumeMounts:
-          {{ range $index, $hostPathConfiguration := .Values.extraAppVolumeMounts }}
-            - name: extrappvolume-{{ $index }}
-              mountPath: {{ $hostPathConfiguration.mountPath }}
-          {{ end }}
-          {{ end }}
-          livenessProbe:
-            httpGet:
-              path: /
-              port: 9980
-            initialDelaySeconds: 10
-            periodSeconds: 10
-            timeoutSeconds: 5
-            failureThreshold: 5
-            successThreshold: 1
-          readinessProbe:
-            httpGet:
-              path: /
-              port: 9980
-            initialDelaySeconds: 10
-            periodSeconds: 10
-            timeoutSeconds: 5
-            failureThreshold: 5
-            successThreshold: 1
-          startupProbe:
-            httpGet:
-              path: /
-              port: 9980
-            initialDelaySeconds: 10
-            periodSeconds: 10
-            timeoutSeconds: 5
-            failureThreshold: 5
-            successThreshold: 1
-          ports:
-            - name: collabora
-              protocol: TCP
-              containerPort: 9980
-          {{ $envList := (default list .Values.environmentVariables) }}
-          {{ $secretName := (include "secretName" .) }}
-          {{ $envConfig := .Values.config }}
-          {{ $envList = mustAppend $envList (dict "name" "timezone" "value" $envConfig.timezone) }}
-          {{ $envList = mustAppend $envList (dict "name" "aliasgroup1" "value" (join "," $envConfig.aliasgroup1)) }}
-          {{ $envList = mustAppend $envList (dict "name" "dictionaries" "value" $envConfig.dictionaries) }}
-          {{ $envList = mustAppend $envList (dict "name" "extra_params" "value" $envConfig.extra_params) }}
-          {{ $envList = mustAppend $envList (dict "name" "DONT_GEN_SSL_CERT" "value" "true") }}
-          {{ if not (contains ":" $envConfig.server_name) }}
-            {{ $envList = mustAppend $envList (dict "name" "server_name" "value" (printf "%v:%v" $envConfig.server_name .Values.nodePort)) }}
-          {{ else }}
-            {{ $envList = mustAppend $envList (dict "name" "server_name" "value" (printf "%v" $envConfig.server_name)) }}
-          {{ end }}
-          {{ if $envConfig.enableWebUI }}
-            {{ $envList = mustAppend $envList (dict "name" "username" "valueFromSecret" true "secretName" $secretName "secretKey" "username") }}
-            {{ $envList = mustAppend $envList (dict "name" "password" "valueFromSecret" true "secretName" $secretName "secretKey" "password") }}
-          {{ end }}
-          {{ include "common.containers.allEnvironmentVariables" (dict "environmentVariables" $envList) | nindent 10 }}
-      volumes:
-        {{ if .Values.certificate }}
-        - name: configuration
-          configMap:
-            defaultMode: 0700
-            name: "nginx-config"
-        - name: certs
-          secret:
-            secretName: {{ include "secretName" . }}
-        {{ end }}
+          env:
+            {{ $envList := (default list .Values.environmentVariables) }}
+            {{ $envList = mustAppend $envList (dict "name" "PUID" "value" (printf "%d" (.Values.ownerUID | int))) }}
+            {{ $envList = mustAppend $envList (dict "name" "PGID" "value" (printf "%d" (.Values.ownerGID | int))) }}
+            {{ include "common.containers.environmentVariables" (dict "environmentVariables" $envList) | nindent 12 }}
+{{ include "common.networking.dnsConfiguration" .Values | nindent 6 }}
+      volumes: {{ include "common.storage.configureAppVolumes" .Values | nindent 8 }}
       {{ range $index, $hostPathConfiguration := .Values.extraAppVolumeMounts }}
         - name: extrappvolume-{{ $index }}
           hostPath:
