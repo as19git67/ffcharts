@@ -7,9 +7,9 @@
         "last_update": "2023-12-13 14:44:52",
         "required_features": [
             "normalize/acl",
-            "definitions/gpuConfiguration",
+            "normalize/ixVolume",
             "definitions/timezone",
-            "normalize/ixVolume"
+            "definitions/gpuConfiguration"
         ],
         "human_version": "1.90.2_2.0.5",
         "version": "2.0.5",
