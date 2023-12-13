@@ -4,7 +4,7 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/ffcharts/ffcharts/charts/minio/1.7.23",
-        "last_update": "2023-12-13 14:43:30",
+        "last_update": "2023-12-13 14:35:12",
         "required_features": [
             "definitions/certificate",
             "normalize/ixVolume"

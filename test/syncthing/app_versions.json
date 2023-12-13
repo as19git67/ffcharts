@@ -6,8 +6,8 @@
         "location": "/__w/ffcharts/ffcharts/test/syncthing/1.0.13",
         "last_update": "2023-12-13 14:44:52",
         "required_features": [
-            "definitions/timezone",
             "definitions/certificate",
+            "definitions/timezone",
             "normalize/ixVolume"
         ],
         "human_version": "1.23.3_1.0.13",
