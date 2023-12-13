@@ -1,0 +1,18 @@
+lidarrConfig:
+  additionalEnvs:
+    - name: LIDARR__API_KEY
+      value: some-long-api-key
+    - name: LIDARR__LOG_LEVEL
+      value: error
+
+lidarrNetwork:
+  webPort: 31000
+
+lidarrStorage:
+  config:
+    type: pvc
+  additionalStorages:
+  - type: pvc
+    mountPath: /pop_music
+  - type: pvc
+    mountPath: /country_music
