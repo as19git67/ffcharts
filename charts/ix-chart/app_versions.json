@@ -4,13 +4,13 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/ffcharts/ffcharts/charts/ix-chart/2308.0.1",
-        "last_update": "2023-12-13 14:38:34",
+        "last_update": "2023-12-13 14:43:30",
         "required_features": [
-            "definitions/interface",
-            "normalize/interfaceConfiguration",
-            "normalize/ixVolume",
             "definitions/gpuConfiguration",
-            "definitions/nodeIP"
+            "normalize/interfaceConfiguration",
+            "definitions/nodeIP",
+            "definitions/interface",
+            "normalize/ixVolume"
         ],
         "human_version": "2308.0.1",
         "version": "2308.0.1",

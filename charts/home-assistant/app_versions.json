@@ -4,7 +4,7 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/ffcharts/ffcharts/charts/home-assistant/1.0.123",
-        "last_update": "2023-12-13 14:38:34",
+        "last_update": "2023-12-13 14:43:30",
         "required_features": [
             "definitions/timezone",
             "normalize/ixVolume"

@@ -4,13 +4,13 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/ffcharts/ffcharts/charts/firenotifier/2023.12.3",
-        "last_update": "2023-12-13 14:38:34",
+        "last_update": "2023-12-13 14:43:30",
         "required_features": [
-            "definitions/interface",
-            "normalize/interfaceConfiguration",
             "definitions/certificate",
             "definitions/gpuConfiguration",
-            "definitions/timezone"
+            "normalize/interfaceConfiguration",
+            "definitions/timezone",
+            "definitions/interface"
         ],
         "human_version": "2023.12.3_2023.12.3",
         "version": "2023.12.3",
