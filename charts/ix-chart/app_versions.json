@@ -6,10 +6,10 @@
         "location": "/__w/ffcharts/ffcharts/charts/ix-chart/2308.0.1",
         "last_update": "2023-12-13 14:35:12",
         "required_features": [
-            "normalize/ixVolume",
-            "definitions/interface",
             "normalize/interfaceConfiguration",
+            "definitions/interface",
             "definitions/nodeIP",
+            "normalize/ixVolume",
             "definitions/gpuConfiguration"
         ],
         "human_version": "2308.0.1",
