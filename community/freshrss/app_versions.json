@@ -4,10 +4,10 @@
         "supported": false,
         "healthy_error": null,
         "location": "/__w/ffcharts/ffcharts/community/freshrss/1.1.1",
-        "last_update": "2023-12-13 14:25:03",
+        "last_update": "2023-12-13 14:29:49",
         "required_features": [
-            "normalize/ixVolume",
             "definitions/timezone",
+            "normalize/ixVolume",
             "normalize/acl"
         ],
         "human_version": "1.22.1_1.1.1",

@@ -4,11 +4,11 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/ffcharts/ffcharts/charts/nextcloud/1.6.54",
-        "last_update": "2023-12-13 14:25:03",
+        "last_update": "2023-12-13 14:29:49",
         "required_features": [
-            "definitions/certificate",
             "definitions/nodeIP",
-            "normalize/ixVolume"
+            "normalize/ixVolume",
+            "definitions/certificate"
         ],
         "human_version": "28.0.0_1.6.54",
         "version": "1.6.54",

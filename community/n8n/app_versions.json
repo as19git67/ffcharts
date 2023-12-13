@@ -4,12 +4,12 @@
         "supported": false,
         "healthy_error": null,
         "location": "/__w/ffcharts/ffcharts/community/n8n/1.2.6",
-        "last_update": "2023-12-13 14:25:03",
+        "last_update": "2023-12-13 14:29:49",
         "required_features": [
-            "definitions/certificate",
             "definitions/nodeIP",
             "normalize/ixVolume",
-            "normalize/acl"
+            "normalize/acl",
+            "definitions/certificate"
         ],
         "human_version": "1.20.0_1.2.6",
         "version": "1.2.6",
