@@ -25,16 +25,16 @@ jobs:
           /bin/bash -c "PWD=${pwd}; /usr/local/bin/catalog_update publish --path $PWD"
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
-            commit_message: Publish new changes in catalog
-            commit_user_name: sonicaj
-            commit_user_email: waqarsonic1@gmail.com
-            commit_author: sonicaj <waqarsonic1@gmail.com>
+          commit_message: Publish new changes in catalog
+          commit_user_name: as19git67
+          commit_user_email: schliesst06.erweitern@icloud.com
+          commit_author: as19git67 <schliesst06.erweitern@icloud.com>
       - name: Update catalog
         run: |
           /bin/bash -c "PWD=${pwd}; /usr/local/bin/catalog_update update --path $PWD"
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
-            commit_message: Update catalog changes
-            commit_user_name: sonicaj
-            commit_user_email: waqarsonic1@gmail.com
-            commit_author: sonicaj <waqarsonic1@gmail.com>
+          commit_message: Update catalog changes
+          commit_user_name: as19git67
+          commit_user_email: schliesst06.erweitern@icloud.com
+          commit_author: as19git67 <schliesst06.erweitern@icloud.com>
