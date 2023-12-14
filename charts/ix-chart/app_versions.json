@@ -6,11 +6,11 @@
         "location": "/__w/ffcharts/ffcharts/charts/ix-chart/2308.0.1",
         "last_update": "2023-12-13 14:35:12",
         "required_features": [
-            "definitions/gpuConfiguration",
-            "normalize/interfaceConfiguration",
-            "definitions/nodeIP",
             "definitions/interface",
-            "normalize/ixVolume"
+            "definitions/nodeIP",
+            "definitions/gpuConfiguration",
+            "normalize/ixVolume",
+            "normalize/interfaceConfiguration"
         ],
         "human_version": "2308.0.1",
         "version": "2308.0.1",

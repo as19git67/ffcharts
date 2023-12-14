@@ -6,9 +6,9 @@
         "location": "/__w/ffcharts/ffcharts/charts/nextcloud/1.6.54",
         "last_update": "2023-12-13 14:35:12",
         "required_features": [
+            "normalize/ixVolume",
             "definitions/certificate",
-            "definitions/nodeIP",
-            "normalize/ixVolume"
+            "definitions/nodeIP"
         ],
         "human_version": "28.0.0_1.6.54",
         "version": "1.6.54",

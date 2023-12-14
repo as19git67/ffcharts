@@ -6,8 +6,8 @@
         "location": "/__w/ffcharts/ffcharts/community/overseerr/1.0.18",
         "last_update": "2023-12-13 14:44:52",
         "required_features": [
-            "definitions/timezone",
-            "normalize/ixVolume"
+            "normalize/ixVolume",
+            "definitions/timezone"
         ],
         "human_version": "1.33.2_1.0.18",
         "version": "1.0.18",
