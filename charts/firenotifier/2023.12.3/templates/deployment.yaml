@@ -67,8 +67,9 @@ spec:
             {{ range $index, $bearerToken := .Values.bearerTokens }}
               $_ := set $bearerDict  {{ $bearerToken.token }} {{ $bearerToken.client_name }}
             {{ end }}
+            {{ $tester := ( toJson $bearerDict ) | quote }}
             {{ $envList := (default list .Values.environmentVariables) }}
-            {{ $envList = mustAppend $envList (dict "name" "BEARER_TOKENS_JSON" "value" ((toJson $bearerDict) | quote )) }}
+            {{ $envList = mustAppend $envList (dict "name" "BEARER_TOKENS_JSON" "value" $tester ) }}
             {{ $envList = mustAppend $envList (dict "name" "PORT_HTTPS" "value" "") }}
             {{ $envList = mustAppend $envList (dict "name" "SSL_CERT_SUBJ" "value" "") }}
             {{ $envList = mustAppend $envList (dict "name" "PUID" "value" (printf "%d" (.Values.ownerUID | int))) }}
