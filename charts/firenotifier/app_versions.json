@@ -4,10 +4,10 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/ffcharts/ffcharts/charts/firenotifier/2023.12.3",
-        "last_update": "2023-12-14 11:34:20",
+        "last_update": "2023-12-14 11:45:06",
         "required_features": [
-            "definitions/timezone",
-            "normalize/ixVolume"
+            "normalize/ixVolume",
+            "definitions/timezone"
         ],
         "human_version": "2023.12.3_2023.12.3",
         "version": "2023.12.3",
