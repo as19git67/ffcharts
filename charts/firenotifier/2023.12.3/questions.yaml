@@ -33,6 +33,22 @@ questions:
       $ref:
         - "definitions/timezone"
 
+
+  - variable: bearerTokens
+    label: "Bearer Token"
+    group: "Configuration"
+    schema:
+      type: dict
+      attrs:
+        - variable: client_name
+          label: "Client Name"
+          schema:
+            type: string
+        - variable: token
+          label: "Bearer Tokenn for Client"
+          schema:
+            type: string
+
   - variable: http_port
     label: "HTTP Port for firenotifier"
     group: Networking
@@ -49,41 +65,6 @@ questions:
     schema:
       type: dict
       attrs:
-        - variable: config
-          label: "Storage Volume for Configuration"
-          schema:
-            type: dict
-            attrs:
-              - variable: datasetName
-                label: "Configuration Storage Volume Dataset Name"
-                schema:
-                  type: string
-                  hidden: true
-                  $ref:
-                    - "normalize/ixVolume"
-                  show_if: [["hostPathEnabled", "=", false]]
-                  default: "ix-config"
-                  editable: false
-              - variable: mountPath
-                label: "Configuration Storage Mount Path"
-                description: "Path where the volume will be mounted inside the pod"
-                schema:
-                  type: path
-                  hidden: true
-                  editable: true
-                  default: "/config"
-              - variable: hostPathEnabled
-                label: "Enable Custom Host Path for Home Assistant Configuration Storage Volume"
-                schema:
-                  type: boolean
-                  default: false
-                  show_subquestions_if: true
-                  subquestions:
-                    - variable: hostPath
-                      label: "Host Path for firenotifier Configuration Storage Volume"
-                      schema:
-                        type: hostpath
-                        required: true
         - variable: data
           label: "Storage Volume for Groups and Recipients configuration"
           schema:
@@ -119,31 +100,6 @@ questions:
                       schema:
                         type: hostpath
                         required: true
-
-  - variable: extraAppVolumeMounts
-    label: "Extra Host Path Volumes"
-    group: "Storage"
-    schema:
-      type: list
-      items:
-        - variable: extraAppVolume
-          label: "Host Path Volume"
-          description: "Add an extra host path volume for firenotifier application"
-          schema:
-            type: dict
-            attrs:
-              - variable: mountPath
-                label: "Mount Path in Pod"
-                description: "Path where the volume will be mounted inside the pod"
-                schema:
-                  type: path
-                  required: true
-              - variable: hostPath
-                label: "Host Path"
-                description: "Host path"
-                schema:
-                  type: hostpath
-                  required: true
 
   - variable: ownerUID
     label: "Storage User ID"
