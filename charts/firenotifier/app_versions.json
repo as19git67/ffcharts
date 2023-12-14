@@ -4,10 +4,10 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/ffcharts/ffcharts/charts/firenotifier/2023.12.3",
-        "last_update": "2023-12-14 11:10:41",
+        "last_update": "2023-12-14 11:34:20",
         "required_features": [
-            "normalize/ixVolume",
-            "definitions/timezone"
+            "definitions/timezone",
+            "normalize/ixVolume"
         ],
         "human_version": "2023.12.3_2023.12.3",
         "version": "2023.12.3",
@@ -119,9 +119,9 @@
                     "group": "Networking",
                     "schema": {
                         "type": "int",
-                        "min": 5000,
+                        "min": 9001,
                         "max": 65535,
-                        "default": 5002,
+                        "default": 15002,
                         "required": true
                     }
                 },
