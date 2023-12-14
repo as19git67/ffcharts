@@ -6,9 +6,9 @@
         "location": "/__w/ffcharts/ffcharts/community/vikunja/1.0.1",
         "last_update": "2023-12-13 14:44:52",
         "required_features": [
-            "normalize/ixVolume",
+            "normalize/acl",
             "definitions/timezone",
-            "normalize/acl"
+            "normalize/ixVolume"
         ],
         "human_version": "0.21.0_1.0.1",
         "version": "1.0.1",
