@@ -6,8 +6,8 @@
         "location": "/__w/ffcharts/ffcharts/charts/home-assistant/1.0.123",
         "last_update": "2023-12-13 14:35:12",
         "required_features": [
-            "definitions/timezone",
-            "normalize/ixVolume"
+            "normalize/ixVolume",
+            "definitions/timezone"
         ],
         "human_version": "2023.12.1_1.0.123",
         "version": "1.0.123",

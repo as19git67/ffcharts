@@ -7,8 +7,8 @@
         "last_update": "2023-12-13 14:35:12",
         "required_features": [
             "normalize/ixVolume",
-            "definitions/certificate",
-            "definitions/nodeIP"
+            "definitions/nodeIP",
+            "definitions/certificate"
         ],
         "human_version": "28.0.0_1.6.54",
         "version": "1.6.54",
