@@ -6,9 +6,9 @@
         "location": "/__w/ffcharts/ffcharts/community/mealie/1.0.1",
         "last_update": "2023-12-13 14:44:52",
         "required_features": [
-            "normalize/acl",
             "normalize/ixVolume",
-            "definitions/timezone"
+            "definitions/timezone",
+            "normalize/acl"
         ],
         "human_version": "latest_1.0.1",
         "version": "1.0.1",
