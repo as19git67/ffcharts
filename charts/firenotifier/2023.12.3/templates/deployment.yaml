@@ -40,48 +40,32 @@ spec:
           {{ end }}
           ports:
             - name: http
+              containerPort: {{ .Values.http_port }}
               protocol: TCP
-              containerPort: 8000
-            {{- if .Values.hostNetwork }}
-              hostPort: {{ .Values.firenotifierServiceHTTP.port }}
-            {{- else }}
-              hostPort: null
-            {{- end }}
-            - name: https
-              protocol: TCP
-              containerPort: 8008
-            {{- if .Values.hostNetwork }}
-              hostPort: {{ .Values.firenotifierServiceHTTPS.port }}
-            {{- else }}
-              hostPort: null
-            {{- end }}
           readinessProbe:
-            httpGet:
-              path: /api/data
-              port: 8008
+            tcpSocket:
+              port: 5002
             initialDelaySeconds: 10
             periodSeconds: 10
             timeoutSeconds: 5
             failureThreshold: 5
             successThreshold: 2
           livenessProbe:
-            httpGet:
-              path: /api/data
-              port: 8000
+            tcpSocket:
+              port: 5002
             initialDelaySeconds: 10
             periodSeconds: 10
             timeoutSeconds: 5
             failureThreshold: 5
-            successThreshold: 1
+            successThreshold: 2
           startupProbe:
-            httpGet:
-              path: /api/data
-              port: 8000
+            tcpSocket:
+              port: 5002
             initialDelaySeconds: 10
-            periodSeconds: 5
-            timeoutSeconds: 2
-            failureThreshold: 60
-            successThreshold: 1
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 5
+            successThreshold: 2
           env:
             {{ $envList := (default list .Values.environmentVariables) }}
             {{ $envList = mustAppend $envList (dict "name" "PUID" "value" (printf "%d" (.Values.ownerUID | int))) }}
