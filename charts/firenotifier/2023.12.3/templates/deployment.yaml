@@ -40,7 +40,7 @@ spec:
           {{ end }}
           ports:
             - name: http
-              containerPort: {{ .Values.http_port }}
+              targetPort: {{ 5002 }}
               protocol: TCP
           readinessProbe:
             tcpSocket:
@@ -49,7 +49,7 @@ spec:
             periodSeconds: 10
             timeoutSeconds: 5
             failureThreshold: 5
-            successThreshold: 2
+            successThreshold: 1
           livenessProbe:
             tcpSocket:
               port: 5002
@@ -57,7 +57,7 @@ spec:
             periodSeconds: 10
             timeoutSeconds: 5
             failureThreshold: 5
-            successThreshold: 2
+            successThreshold: 1
           startupProbe:
             tcpSocket:
               port: 5002
@@ -65,9 +65,10 @@ spec:
             periodSeconds: 10
             timeoutSeconds: 5
             failureThreshold: 5
-            successThreshold: 2
+            successThreshold: 1
           env:
             {{ $envList := (default list .Values.environmentVariables) }}
+            {{ $envList = mustAppend $envList (dict "name" "PORT_HTTP" "value" 5002) }}
             {{ $envList = mustAppend $envList (dict "name" "PUID" "value" (printf "%d" (.Values.ownerUID | int))) }}
             {{ $envList = mustAppend $envList (dict "name" "PGID" "value" (printf "%d" (.Values.ownerGID | int))) }}
             {{ include "common.containers.environmentVariables" (dict "environmentVariables" $envList) | nindent 12 }}
