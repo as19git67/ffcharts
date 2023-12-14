@@ -8,8 +8,8 @@
         "required_features": [
             "normalize/ixVolume",
             "definitions/nodeIP",
-            "definitions/certificate",
-            "normalize/acl"
+            "normalize/acl",
+            "definitions/certificate"
         ],
         "human_version": "1.20.0_1.2.6",
         "version": "1.2.6",

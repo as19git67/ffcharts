@@ -6,9 +6,9 @@
         "location": "/__w/ffcharts/ffcharts/charts/wg-easy/2.0.1",
         "last_update": "2023-12-13 14:35:12",
         "required_features": [
-            "normalize/ixVolume",
             "definitions/nodeIP",
-            "normalize/acl"
+            "normalize/acl",
+            "normalize/ixVolume"
         ],
         "human_version": "7_2.0.1",
         "version": "2.0.1",
