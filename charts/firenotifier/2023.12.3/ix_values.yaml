@@ -1,25 +1,4 @@
 image:
   pullPolicy: IfNotPresent
   repository: ghcr.io/as19git67/firenotifier
-  tag: 1.1.1
-
-securityContext:
-  container:
-    readOnlyRootFilesystem: false
-
-service:
-  main:
-    ports:
-      main:
-        protocol: https
-        targetPort: 8008
-        port: 8008
-
-persistence:
-  config:
-    enabled: true
-    mountPath: "/data"
-
-portal:
-  open:
-    enabled: false
+  tag: 1.2.0

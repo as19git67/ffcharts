@@ -63,18 +63,7 @@ spec:
             failureThreshold: 5
             successThreshold: 1
           env:
-            {{ $bearer := "{" }}
-            {{ range $index, $bearerToken := .Values.bearerTokens }}
-              {{ if gt $index 0 }}
-                {{ $bearer := printf "%s%s" $bearer ",\"" }}
-              {{ else }}
-                {{ $bearer := printf "%s%s" $bearer "\"" }}
-              {{ end }}
-              {{ $bearer := printf "%s%s%s%s%s" $bearer $bearerToken.token "\":\"" $bearerToken.client_name "\"" }}
-            {{ end }}
-            {{ $bearerAsJson := printf "%s%s" $bearer "}" }}
             {{ $envList := (default list .Values.environmentVariables) }}
-            {{ $envList = mustAppend $envList (dict "name" "BEARER_TOKENS_JSON" "value" $bearerAsJson ) }}
             {{ $envList = mustAppend $envList (dict "name" "PORT_HTTPS" "value" "") }}
             {{ $envList = mustAppend $envList (dict "name" "XXXSSL_CERT_SUBJ" "value" "") }}
             {{ $envList = mustAppend $envList (dict "name" "PUID" "value" (printf "%d" (.Values.ownerUID | int))) }}

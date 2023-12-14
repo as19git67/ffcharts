@@ -3,8 +3,8 @@
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/ffcharts/ffcharts/charts/firenotifier/2023.12.3",
-        "last_update": "2023-12-14 17:15:51",
+        "location": "/__w/ffcharts/ffcharts/charts/firenotifier/2023.12.4",
+        "last_update": "2023-12-14 19:15:51",
         "required_features": [
             "normalize/ixVolume",
             "definitions/timezone"
