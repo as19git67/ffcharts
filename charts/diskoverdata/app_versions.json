@@ -6,8 +6,8 @@
         "location": "/__w/ffcharts/ffcharts/charts/diskoverdata/1.0.14",
         "last_update": "2023-12-13 14:35:12",
         "required_features": [
-            "definitions/timezone",
-            "normalize/ixVolume"
+            "normalize/ixVolume",
+            "definitions/timezone"
         ],
         "human_version": "2.0.1_1.0.14",
         "version": "1.0.14",

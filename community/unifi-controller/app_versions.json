@@ -6,9 +6,9 @@
         "location": "/__w/ffcharts/ffcharts/community/unifi-controller/1.2.1",
         "last_update": "2023-12-13 14:44:52",
         "required_features": [
+            "normalize/ixVolume",
             "definitions/certificate",
-            "definitions/timezone",
-            "normalize/ixVolume"
+            "definitions/timezone"
         ],
         "human_version": "8.0.7_1.2.1",
         "version": "1.2.1",
