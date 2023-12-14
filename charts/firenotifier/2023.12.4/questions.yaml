@@ -19,27 +19,6 @@ questions:
       $ref:
         - "definitions/timezone"
 
-  - variable: bearerTokens
-    label: "List of Bearer Token"
-    group: "Configuration"
-    schema:
-      type: list
-      items:
-        - variable: bearerToken
-          label: "Bearer Token"
-          description: "Add a bearer token for accessing the REST API"
-          schema:
-            type: dict
-            attrs:
-              - variable: client_name
-                label: "Client Name"
-                schema:
-                  type: string
-              - variable: token
-                label: "Bearer Tokenn for Client"
-                schema:
-                  type: string
-
   - variable: http_port
     label: "HTTP Port for firenotifier"
     group: Networking
