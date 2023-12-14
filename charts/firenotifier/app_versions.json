@@ -4,7 +4,7 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/ffcharts/ffcharts/charts/firenotifier/2023.12.4",
-        "last_update": "2023-12-14 21:38:10",
+        "last_update": "2023-12-14 21:52:23",
         "required_features": [
             "definitions/timezone",
             "normalize/ixVolume"

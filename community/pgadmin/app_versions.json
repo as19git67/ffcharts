@@ -6,8 +6,8 @@
         "location": "/__w/ffcharts/ffcharts/community/pgadmin/1.1.4",
         "last_update": "2023-12-13 14:44:52",
         "required_features": [
-            "normalize/ixVolume",
-            "definitions/certificate"
+            "definitions/certificate",
+            "normalize/ixVolume"
         ],
         "human_version": "8.0_1.1.4",
         "version": "1.1.4",
