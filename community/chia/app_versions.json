@@ -6,8 +6,8 @@
         "location": "/__w/ffcharts/ffcharts/community/chia/1.0.24",
         "last_update": "2023-12-13 14:44:52",
         "required_features": [
-            "normalize/ixVolume",
-            "definitions/timezone"
+            "definitions/timezone",
+            "normalize/ixVolume"
         ],
         "human_version": "2.1.1_1.0.24",
         "version": "1.0.24",

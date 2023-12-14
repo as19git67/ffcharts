@@ -6,8 +6,8 @@
         "location": "/__w/ffcharts/ffcharts/community/jellyseerr/1.0.12",
         "last_update": "2023-12-13 14:44:52",
         "required_features": [
-            "normalize/ixVolume",
-            "definitions/timezone"
+            "definitions/timezone",
+            "normalize/ixVolume"
         ],
         "human_version": "1.7.0_1.0.12",
         "version": "1.0.12",
