@@ -65,7 +65,7 @@ spec:
           env:
             {{ $bearer := "{" }}
             {{ range $index, $bearerToken := .Values.bearerTokens }}
-              {{ if $index gt 0 }}
+              {{ if gt $index 0 }}
                 {{ $bearer := printf "%s%s" $bearer ",\"" }}
               {{ else }}
                 {{ $bearer := printf "%s%s" $bearer "\"" }}
