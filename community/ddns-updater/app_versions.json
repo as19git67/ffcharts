@@ -6,8 +6,8 @@
         "location": "/__w/ffcharts/ffcharts/community/ddns-updater/1.0.18",
         "last_update": "2023-12-13 14:44:52",
         "required_features": [
-            "normalize/ixVolume",
-            "definitions/timezone"
+            "definitions/timezone",
+            "normalize/ixVolume"
         ],
         "human_version": "v2.5.0_1.0.18",
         "version": "1.0.18",

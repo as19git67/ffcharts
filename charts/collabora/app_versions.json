@@ -6,9 +6,9 @@
         "location": "/__w/ffcharts/ffcharts/charts/collabora/1.2.23",
         "last_update": "2023-12-13 14:35:12",
         "required_features": [
-            "definitions/certificate",
             "definitions/nodeIP",
-            "definitions/timezone"
+            "definitions/timezone",
+            "definitions/certificate"
         ],
         "human_version": "23.05.5.4.1_1.2.23",
         "version": "1.2.23",

@@ -6,8 +6,8 @@
         "location": "/__w/ffcharts/ffcharts/charts/emby/1.0.29",
         "last_update": "2023-12-13 14:35:12",
         "required_features": [
-            "normalize/ixVolume",
-            "definitions/gpuConfiguration"
+            "definitions/gpuConfiguration",
+            "normalize/ixVolume"
         ],
         "human_version": "4.7.14.0_1.0.29",
         "version": "1.0.29",
