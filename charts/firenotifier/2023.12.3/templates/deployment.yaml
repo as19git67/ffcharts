@@ -63,15 +63,20 @@ spec:
             failureThreshold: 5
             successThreshold: 1
           env:
-            {{ $bearerDict := dict }}
+            {{ $bearer := "{" }}
             {{ range $index, $bearerToken := .Values.bearerTokens }}
-              $_ := set $bearerDict  {{ $bearerToken.token }} {{ $bearerToken.client_name }}
+              {{ if $index gt 0 }}
+                {{ $bearer := printf "%s%s" $bearer ",\"" }}
+              {{ else }}
+                {{ $bearer := printf "%s%s" $bearer "\"" }}
+              {{ end }}
+              {{ $bearer := printf "%s%s%s%s%s" $bearer $bearerToken.token "\":\"" $bearerToken.client_name "\"" }}
             {{ end }}
-            {{ $tester := $bearerDict | quote }}
+            {{ $bearerAsJson := printf "%s%s" $bearer "}" }}
             {{ $envList := (default list .Values.environmentVariables) }}
-            {{ $envList = mustAppend $envList (dict "name" "BEARER_TOKENS_JSON" "value" "{"app1":"x"}" ) }}
+            {{ $envList = mustAppend $envList (dict "name" "BEARER_TOKENS_JSON" "value" $bearerAsJson ) }}
             {{ $envList = mustAppend $envList (dict "name" "PORT_HTTPS" "value" "") }}
-            {{ $envList = mustAppend $envList (dict "name" "SSL_CERT_SUBJ" "value" "") }}
+            {{ $envList = mustAppend $envList (dict "name" "XXXSSL_CERT_SUBJ" "value" "") }}
             {{ $envList = mustAppend $envList (dict "name" "PUID" "value" (printf "%d" (.Values.ownerUID | int))) }}
             {{ $envList = mustAppend $envList (dict "name" "PGID" "value" (printf "%d" (.Values.ownerGID | int))) }}
             {{ include "common.containers.environmentVariables" (dict "environmentVariables" $envList) | nindent 12 }}
