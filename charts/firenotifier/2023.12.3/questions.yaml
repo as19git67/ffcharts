@@ -10,20 +10,6 @@ groups:
   - name: "Resource Limits"
     description: "Set CPU/memory limits for Kubernetes Pod"
 questions:
-  - variable: global
-    group: Configuration
-    label: "Global Settings"
-    schema:
-      additional_attrs: true
-      type: dict
-      attrs:
-        - variable: stopAll
-          label: Stop All
-          description: "Stops All Running pods and hibernates cnpg"
-          schema:
-            type: boolean
-            default: false
-
   - variable: TZ
     label: Timezone
     group: "Configuration"
@@ -33,21 +19,26 @@ questions:
       $ref:
         - "definitions/timezone"
 
-
   - variable: bearerTokens
-    label: "Bearer Token"
+    label: "List of Bearer Token"
     group: "Configuration"
     schema:
-      type: dict
-      attrs:
-        - variable: client_name
-          label: "Client Name"
+      type: list
+      items:
+        - variable: bearerToken
+          label: "Bearer Token"
+          description: "Add a bearer token for accessing the REST API"
           schema:
-            type: string
-        - variable: token
-          label: "Bearer Tokenn for Client"
-          schema:
-            type: string
+            type: dict
+            attrs:
+              - variable: client_name
+                label: "Client Name"
+                schema:
+                  type: string
+              - variable: token
+                label: "Bearer Tokenn for Client"
+                schema:
+                  type: string
 
   - variable: http_port
     label: "HTTP Port for firenotifier"
