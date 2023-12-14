@@ -1,5 +1,5 @@
 {{ $ports := list }}
-{{ $ports = mustAppend $ports (dict "name" "http" "port" 5002 "nodePort" .Values.http_port) }}
+{{ $ports = mustAppend $ports (dict "name" "http" "port" 15002 "nodePort" .Values.http_port) }}
 {{ $params := . }}
 {{ $_ := set $params "commonService" (dict "type" "NodePort" "ports" $ports ) }}
 {{ include "common.classes.service" $params }}
