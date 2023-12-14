@@ -6,9 +6,9 @@
         "location": "/__w/ffcharts/ffcharts/charts/elastic-search/1.1.2",
         "last_update": "2023-12-13 14:35:12",
         "required_features": [
-            "normalize/acl",
             "definitions/certificate",
-            "normalize/ixVolume"
+            "normalize/ixVolume",
+            "normalize/acl"
         ],
         "human_version": "8.11.3_1.1.2",
         "version": "1.1.2",

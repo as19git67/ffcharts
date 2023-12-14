@@ -4,10 +4,10 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/ffcharts/ffcharts/charts/firenotifier/2023.12.3",
-        "last_update": "2023-12-14 14:04:22",
+        "last_update": "2023-12-14 15:27:40",
         "required_features": [
-            "definitions/timezone",
-            "normalize/ixVolume"
+            "normalize/ixVolume",
+            "definitions/timezone"
         ],
         "human_version": "2023.12.3_2023.12.3",
         "version": "2023.12.3",
@@ -72,26 +72,6 @@
             ],
             "questions": [
                 {
-                    "variable": "global",
-                    "group": "Configuration",
-                    "label": "Global Settings",
-                    "schema": {
-                        "additional_attrs": true,
-                        "type": "dict",
-                        "attrs": [
-                            {
-                                "variable": "stopAll",
-                                "label": "Stop All",
-                                "description": "Stops All Running pods and hibernates cnpg",
-                                "schema": {
-                                    "type": "boolean",
-                                    "default": false
-                                }
-                            }
-                        ]
-                    }
-                },
-                {
                     "variable": "TZ",
                     "label": "Timezone",
                     "group": "Configuration",
@@ -115,23 +95,33 @@
                 },
                 {
                     "variable": "bearerTokens",
-                    "label": "Bearer Token",
+                    "label": "List of Bearer Token",
                     "group": "Configuration",
                     "schema": {
-                        "type": "dict",
-                        "attrs": [
+                        "type": "list",
+                        "items": [
                             {
-                                "variable": "client_name",
-                                "label": "Client Name",
+                                "variable": "bearerToken",
+                                "label": "Bearer Token",
+                                "description": "Add a bearer token for accessing the REST API",
                                 "schema": {
-                                    "type": "string"
-                                }
-                            },
-                            {
-                                "variable": "token",
-                                "label": "Bearer Tokenn for Client",
-                                "schema": {
-                                    "type": "string"
+                                    "type": "dict",
+                                    "attrs": [
+                                        {
+                                            "variable": "client_name",
+                                            "label": "Client Name",
+                                            "schema": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        {
+                                            "variable": "token",
+                                            "label": "Bearer Tokenn for Client",
+                                            "schema": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    ]
                                 }
                             }
                         ]
