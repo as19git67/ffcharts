@@ -1,0 +1,21 @@
+image:
+  repository: jvmilazz0/kavita
+  pullPolicy: IfNotPresent
+  tag: 0.7.11
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+kavitaConfig:
+  additionalEnvs: []
+
+kavitaNetwork:
+  webPort: 30069
+
+kavitaStorage:
+  config:
+    type: ixVolume
+    datasetName: config
+  additionalStorages: []
