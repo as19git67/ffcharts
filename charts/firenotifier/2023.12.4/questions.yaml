@@ -1,10 +1,10 @@
 groups:
   - name: "Configuration"
-    description: "Home Assistant application configuration"
+    description: "Fire Notifier application configuration"
   - name: "Storage"
-    description: "Configure storage for homeassistant"
+    description: "Configure storage for firenotifier"
   - name: "Networking"
-    description: "Networking Configuration for homeassistant"
+    description: "Networking Configuration for firenotifier"
   - name: "Advanced DNS Settings"
     description: "Configure DNS settings"
   - name: "Resource Limits"
@@ -18,6 +18,51 @@ questions:
       default: "Etc/UTC"
       $ref:
         - "definitions/timezone"
+
+  - variable: minWaitMinutesToNotifySameGroup
+    label: Minimum wait time in minutes between notifications to same group
+    group: "Configuration"
+    schema:
+      type: int
+      min: 0
+      max: 6000
+      default: 2
+
+  - variable: sms_client_id
+    label: TextAnywhere Client ID
+    group: "Configuration"
+    schema:
+      type: string
+
+  - variable: sms_client_secret
+    label: TextAnywhere Client Password
+    group: "Configuration"
+    schema:
+      type: password
+
+  - variable: sms_validity_hours
+    label: SMS validity hours
+    group: "Configuration"
+    schema:
+      type: int
+      min: 1
+      max: 240
+      default: 26
+
+  - variable: sms_wait_for_status
+    label: Wait time in seconds until status of sent SMS gets retrieved
+    group: "Configuration"
+    schema:
+      type: int
+      min: 1
+      max: 100000
+      default: 600
+
+  - variable: sms_sender_nr
+    label: SMS Sender Number (optional)
+    group: "Configuration"
+    schema:
+      type: string
 
   - variable: http_port
     label: "HTTP Port for firenotifier"
