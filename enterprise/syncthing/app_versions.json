@@ -3,23 +3,25 @@
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/ffcharts/ffcharts/community/rust-desk/1.1.4",
-        "last_update": "2023-12-15 16:55:37",
+        "location": "/__w/ffcharts/ffcharts/enterprise/syncthing/1.1.4",
+        "last_update": "2023-12-15 16:57:01",
         "required_features": [
-            "normalize/ixVolume"
+            "definitions/timezone",
+            "normalize/ixVolume",
+            "definitions/certificate"
         ],
-        "human_version": "1.1.9_1.1.4",
+        "human_version": "1.23.3_1.1.4",
         "version": "1.1.4",
         "chart_metadata": {
-            "name": "rust-desk",
-            "description": "Rust Desk is an open-source remote desktop, and alternative to TeamViewer.",
+            "name": "syncthing",
+            "description": "Syncthing is a continuous file synchronization program.",
             "annotations": {
-                "title": "Rust Desk"
+                "title": "Syncthing"
             },
             "type": "application",
             "version": "1.1.4",
             "apiVersion": "v2",
-            "appVersion": "1.1.9",
+            "appVersion": "1.23.3",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
@@ -35,94 +37,187 @@
                     "version": "1.2.3"
                 }
             ],
-            "home": "https://rustdesk.com",
-            "icon": "https://media.sys.truenas.net/apps/rust-desk/icons/icon.png",
+            "home": "https://syncthing.net/",
+            "icon": "https://media.sys.truenas.net/apps/syncthing/icons/icon.svg",
             "sources": [
-                "https://hub.docker.com/r/rustdesk/rustdesk-server",
-                "https://github.com/truenas/charts/tree/master/community/rust-desk",
-                "https://github.com/rustdesk/rustdesk-server"
+                "https://syncthing.net/",
+                "https://github.com/syncthing/syncthing",
+                "https://hub.docker.com/r/syncthing/syncthing",
+                "https://github.com/truenas/charts/tree/master/enterprise/syncthing"
             ],
             "keywords": [
-                "remote",
-                "desktop"
+                "sync",
+                "file-sharing"
             ]
         },
         "app_metadata": {
             "runAsContext": [
                 {
-                    "userName": "rust-desk",
-                    "groupName": "rust-desk",
-                    "gid": 568,
-                    "uid": 568,
-                    "description": "Rust Desk can run as any non-root user."
+                    "userName": "root",
+                    "groupName": "root",
+                    "gid": 0,
+                    "uid": 0,
+                    "description": "Syncthing runs as root and starts the syncthing process as a non-root user."
                 }
             ],
-            "capabilities": [],
+            "capabilities": [
+                {
+                    "name": "CHOWN",
+                    "description": "Syncthing is able to chown files."
+                },
+                {
+                    "name": "DAC_OVERRIDE",
+                    "description": "Syncthing is able to bypass permission checks."
+                },
+                {
+                    "name": "FOWNER",
+                    "description": "Syncthing is able bypass permission checks for it's sub-processes."
+                },
+                {
+                    "name": "SETUID",
+                    "description": "Syncthing is able to set user ID for it's sub-processes."
+                },
+                {
+                    "name": "SETGID",
+                    "description": "Syncthing is able to set group ID for it's sub-processes."
+                },
+                {
+                    "name": "SETPCAP",
+                    "description": "Syncthing is able to set process capabilities."
+                },
+                {
+                    "name": "SETFCAP",
+                    "description": "Syncthing is able to set file capabilities."
+                }
+            ],
             "hostMounts": []
         },
         "schema": {
             "groups": [
                 {
-                    "name": "Rust Desk Configuration",
-                    "description": "Configure Rust Desk"
+                    "name": "Syncthing Configuration",
+                    "description": "Configure Syncthing"
                 },
                 {
                     "name": "User and Group Configuration",
-                    "description": "Configure User and Group for Rust Desk"
+                    "description": "Configure User and Group for Syncthing"
                 },
                 {
                     "name": "Network Configuration",
-                    "description": "Configure Network for Rust Desk"
+                    "description": "Configure Network for Syncthing"
                 },
                 {
                     "name": "Storage Configuration",
-                    "description": "Configure Storage for Rust Desk"
+                    "description": "Configure Storage for Syncthing"
                 },
                 {
                     "name": "Resources Configuration",
-                    "description": "Configure Resources for Rust Desk"
+                    "description": "Configure Resources for Syncthing"
                 }
             ],
+            "portals": {
+                "web_portal": {
+                    "protocols": [
+                        "$kubernetes-resource_configmap_portal_protocol"
+                    ],
+                    "host": [
+                        "$kubernetes-resource_configmap_portal_host"
+                    ],
+                    "ports": [
+                        "$kubernetes-resource_configmap_portal_port"
+                    ],
+                    "path": "$kubernetes-resource_configmap_portal_path"
+                }
+            },
             "questions": [
                 {
-                    "variable": "rustConfig",
+                    "variable": "TZ",
+                    "group": "Syncthing Configuration",
+                    "label": "Timezone",
+                    "schema": {
+                        "type": "string",
+                        "default": "America/Los_Angeles",
+                        "required": true,
+                        "$ref": [
+                            "definitions/timezone"
+                        ],
+                        "enum": [
+                            {
+                                "value": "Asia/Damascus",
+                                "description": "'Asia/Damascus' timezone"
+                            },
+                            {
+                                "value": "Asia/Saigon",
+                                "description": "'Asia/Saigon' timezone"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "variable": "syncthingConfig",
                     "label": "",
-                    "group": "Rust Desk Configuration",
+                    "group": "Syncthing Configuration",
                     "schema": {
                         "type": "dict",
                         "attrs": [
                             {
-                                "variable": "allowOnlyEncryptedConnections",
-                                "label": "Allow Only Encrypted Connections",
-                                "description": "Allow only encrypted connections.</br>\nClients have to use the generated key to connect to the server.\n",
+                                "variable": "natTraversal",
+                                "label": "NAT Traversal",
                                 "schema": {
                                     "type": "boolean",
-                                    "default": false
+                                    "default": false,
+                                    "hidden": true
                                 }
                             },
                             {
-                                "variable": "additionalRelayServers",
-                                "label": "Additional Relay Servers",
-                                "description": "Configure additional relay servers for Rust Desk.</br>\nThe internal relay server will be added automatically. </br>\nFormat: </br> host:port\n",
+                                "variable": "localDiscovery",
+                                "label": "Local Discovery",
                                 "schema": {
-                                    "type": "list",
-                                    "default": [],
-                                    "items": [
-                                        {
-                                            "variable": "relayServer",
-                                            "label": "Relay Server",
-                                            "schema": {
-                                                "type": "string",
-                                                "required": true
-                                            }
-                                        }
-                                    ]
+                                    "type": "boolean",
+                                    "default": false,
+                                    "hidden": true
+                                }
+                            },
+                            {
+                                "variable": "globalDiscovery",
+                                "label": "Global Discovery",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false,
+                                    "hidden": true
+                                }
+                            },
+                            {
+                                "variable": "telemetry",
+                                "label": "Telemetry",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false,
+                                    "hidden": true
+                                }
+                            },
+                            {
+                                "variable": "relaying",
+                                "label": "Relaying",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false,
+                                    "hidden": true
+                                }
+                            },
+                            {
+                                "variable": "announceLANAddresses",
+                                "label": "Announce LAN Addresses",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false,
+                                    "hidden": true
                                 }
                             },
                             {
                                 "variable": "additionalEnvs",
                                 "label": "Additional Environment Variables",
-                                "description": "Configure additional environment variables for Rust Desk.",
+                                "description": "Configure additional environment variables for Syncthing.",
                                 "schema": {
                                     "type": "list",
                                     "default": [],
@@ -159,7 +254,7 @@
                     }
                 },
                 {
-                    "variable": "rustRunAs",
+                    "variable": "syncthingID",
                     "label": "",
                     "group": "User and Group Configuration",
                     "schema": {
@@ -168,22 +263,24 @@
                             {
                                 "variable": "user",
                                 "label": "User ID",
-                                "description": "The user id that Rust Desk will run as.",
+                                "description": "The user id that Syncthing files will be owned by.",
                                 "schema": {
                                     "type": "int",
-                                    "min": 2,
+                                    "min": 568,
                                     "default": 568,
+                                    "immutable": true,
                                     "required": true
                                 }
                             },
                             {
                                 "variable": "group",
                                 "label": "Group ID",
-                                "description": "The group id that Rust Desk will run as.",
+                                "description": "The group id that Syncthing files will be owned by.",
                                 "schema": {
                                     "type": "int",
-                                    "min": 2,
+                                    "min": 568,
                                     "default": 568,
+                                    "immutable": true,
                                     "required": true
                                 }
                             }
@@ -191,118 +288,104 @@
                     }
                 },
                 {
-                    "variable": "rustNetwork",
+                    "variable": "syncthingNetwork",
                     "label": "",
                     "group": "Network Configuration",
                     "schema": {
                         "type": "dict",
                         "attrs": [
                             {
-                                "variable": "natTypeTestPort",
-                                "label": "NAT Type Test Port",
-                                "description": "The port to use for NAT type test.</br>\nInternal port will always be 21115\n",
-                                "schema": {
-                                    "type": "int",
-                                    "default": 21115,
-                                    "min": 9000,
-                                    "max": 65535,
-                                    "required": true
-                                }
-                            },
-                            {
-                                "variable": "idRegHolePunchPort",
-                                "label": "ID Registration and Hole Punching Port",
-                                "description": "The port to use for ID registration and Hole punching.</br>\nInternal port will always be 21116 (TCP/UDP)\n",
-                                "schema": {
-                                    "type": "int",
-                                    "default": 21116,
-                                    "min": 9000,
-                                    "max": 65535,
-                                    "required": true
-                                }
-                            },
-                            {
-                                "variable": "relayPort",
-                                "label": "Relay Port",
-                                "description": "The port to use for relay.</br>\nInternal port will always be 21117\n",
-                                "schema": {
-                                    "type": "int",
-                                    "default": 21117,
-                                    "min": 9000,
-                                    "max": 65535,
-                                    "required": true
-                                }
-                            },
-                            {
-                                "variable": "enableWebClientPorts",
-                                "label": "Enable Web Client Ports",
-                                "description": "Enable web client ports.</br>\nThis is only required for web clients.</br>\n",
+                                "variable": "hostNetwork",
+                                "label": "Host Network",
+                                "description": "Bind to the host network.</br></br>\nIf this is disabled, you will need to add your local networks in CIDR format to the Syncthing WebUI.</br>\nIn the Syncthing WebUI, go to Advanced Settings > Options > Always Local Nets</br>\nSeparate each CIDR network with a comma.</br>\nExample: 192.168.0.0/24,192.168.1.0/24\n",
                                 "schema": {
                                     "type": "boolean",
                                     "default": true
                                 }
                             },
                             {
-                                "variable": "serverWebClientsPort",
-                                "label": "Server Web Clients Port",
-                                "description": "The port to use for server web clients.</br>\nInternal port will always be 21118\n",
+                                "variable": "webPort",
+                                "label": "Web Port",
+                                "description": "The port for the Syncthing WebUI.",
                                 "schema": {
                                     "type": "int",
-                                    "default": 21118,
+                                    "default": 31000,
                                     "min": 9000,
                                     "max": 65535,
-                                    "required": true,
-                                    "show_if": [
-                                        [
-                                            "enableWebClientPorts",
-                                            "=",
-                                            true
-                                        ]
-                                    ]
+                                    "required": true
                                 }
                             },
                             {
-                                "variable": "relayWebClientsPort",
-                                "label": "Relay Web Clients Port",
-                                "description": "The port to use for relay web clients.</br>\nInternal port will always be 21119\n",
+                                "variable": "tcpPort",
+                                "label": "TCP Port (File Transfers)",
+                                "description": "The TCP port for Syncthing transfers.",
                                 "schema": {
                                     "type": "int",
-                                    "default": 21119,
-                                    "min": 9000,
-                                    "max": 65535,
-                                    "required": true,
                                     "show_if": [
                                         [
-                                            "enableWebClientPorts",
+                                            "hostNetwork",
                                             "=",
-                                            true
+                                            false
                                         ]
-                                    ]
+                                    ],
+                                    "default": 22000,
+                                    "min": 9000,
+                                    "max": 65535,
+                                    "required": true
                                 }
                             },
                             {
-                                "variable": "hostNetwork",
-                                "label": "Host Network",
-                                "description": "Bind to the host network. It's recommended to keep this disabled.</br>\n",
+                                "variable": "quicPort",
+                                "label": "QUIC (UDP) Port (File Transfers)",
+                                "description": "The QUIC (UDP) port for Syncthing transfers.",
                                 "schema": {
-                                    "type": "boolean",
-                                    "default": false
+                                    "type": "int",
+                                    "show_if": [
+                                        [
+                                            "hostNetwork",
+                                            "=",
+                                            false
+                                        ]
+                                    ],
+                                    "default": 22000,
+                                    "min": 9000,
+                                    "max": 65535,
+                                    "required": true
+                                }
+                            },
+                            {
+                                "variable": "certificateID",
+                                "label": "Certificate",
+                                "description": "The certificate to use for Syncthing GUI.",
+                                "schema": {
+                                    "type": "int",
+                                    "null": true,
+                                    "$ref": [
+                                        "definitions/certificate"
+                                    ],
+                                    "enum": [
+                                        {
+                                            "value": null,
+                                            "description": "No Certificate"
+                                        }
+                                    ],
+                                    "default": null
                                 }
                             }
                         ]
                     }
                 },
                 {
-                    "variable": "rustStorage",
+                    "variable": "syncthingStorage",
                     "label": "",
                     "group": "Storage Configuration",
                     "schema": {
                         "type": "dict",
                         "attrs": [
                             {
-                                "variable": "data",
-                                "label": "Rust Desk Data Storage",
-                                "description": "The path to store Rust Desk Data.",
+                                "variable": "home",
+                                "label": "Syncthing Home Storage",
+                                "description": "The path to store Syncthing Home Directory.",
                                 "schema": {
                                     "type": "dict",
                                     "attrs": [
@@ -342,7 +425,7 @@
                                                 "required": true,
                                                 "hidden": true,
                                                 "immutable": true,
-                                                "default": "data",
+                                                "default": "home",
                                                 "$ref": [
                                                     "normalize/ixVolume"
                                                 ]
@@ -370,10 +453,18 @@
                             {
                                 "variable": "additionalStorages",
                                 "label": "Additional Storage",
-                                "description": "Additional storage for Rust Desk.",
+                                "description": "Additional storage for Syncthing.",
                                 "schema": {
                                     "type": "list",
-                                    "default": [],
+                                    "required": true,
+                                    "empty": false,
+                                    "default": [
+                                        {
+                                            "type": "hostPath",
+                                            "mountPath": "/data1",
+                                            "hostPath\"": ""
+                                        }
+                                    ],
                                     "items": [
                                         {
                                             "variable": "storageEntry",
@@ -384,20 +475,16 @@
                                                     {
                                                         "variable": "type",
                                                         "label": "Type",
-                                                        "description": "ixVolume: Is dataset created automatically by the system.</br>\nHost Path: Is a path that already exists on the system.</br>\nSMB Share: Is a SMB share that is mounted to a persistent volume claim.\n",
+                                                        "description": "Host Path: Is a path that already exists on the system.</br>\nSMB Share: Mounts a persistent volume claim to a SMB share.\n",
                                                         "schema": {
                                                             "type": "string",
                                                             "required": true,
-                                                            "default": "ixVolume",
+                                                            "default": "hostPath",
                                                             "immutable": true,
                                                             "enum": [
                                                                 {
                                                                     "value": "hostPath",
                                                                     "description": "Host Path (Path that already exists on the system)"
-                                                                },
-                                                                {
-                                                                    "value": "ixVolume",
-                                                                    "description": "ixVolume (Dataset created automatically by the system)"
                                                                 },
                                                                 {
                                                                     "value": "smb-pv-pvc",
@@ -429,27 +516,6 @@
                                                                 ]
                                                             ],
                                                             "required": true
-                                                        }
-                                                    },
-                                                    {
-                                                        "variable": "datasetName",
-                                                        "label": "Dataset Name",
-                                                        "description": "The name of the dataset to use for storage.",
-                                                        "schema": {
-                                                            "type": "string",
-                                                            "show_if": [
-                                                                [
-                                                                    "type",
-                                                                    "=",
-                                                                    "ixVolume"
-                                                                ]
-                                                            ],
-                                                            "required": true,
-                                                            "immutable": true,
-                                                            "default": "storage_entry",
-                                                            "$ref": [
-                                                                "normalize/ixVolume"
-                                                            ]
                                                         }
                                                     },
                                                     {
@@ -575,7 +641,7 @@
                                         {
                                             "variable": "cpu",
                                             "label": "CPU",
-                                            "description": "CPU limit for Rust Desk.",
+                                            "description": "CPU limit for Syncthing.",
                                             "schema": {
                                                 "type": "string",
                                                 "max_length": 6,
@@ -588,7 +654,7 @@
                                         {
                                             "variable": "memory",
                                             "label": "Memory",
-                                            "description": "Memory limit for Rust Desk.",
+                                            "description": "Memory limit for Syncthing.",
                                             "schema": {
                                                 "type": "string",
                                                 "max_length": 12,
@@ -606,8 +672,8 @@
                 }
             ]
         },
-        "app_readme": "<h1>Rust Desk</h1>\n<p><a href=\"https://rustdesk.com\">Rust Desk</a> is an open-source remote desktop, and alternative to TeamViewer.</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>Rust Desk</code> directories.\nAfterward, the <code>Rust Desk</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).\nAll mounted storage(s) will be <code>chown</code>ed only if the parent directory does not match the configured user.</p>\n</blockquote>",
-        "detailed_readme": "<h1>Rust Desk</h1>\n<p><a href=\"https://rustdesk.com\">Rust Desk</a> is an open-source remote desktop, and alternative to TeamViewer.</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>Rust Desk</code> directories.\nAfterward, the <code>Rust Desk</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).\nAll mounted storage(s) will be <code>chown</code>ed only if the parent directory does not match the configured user.</p>\n</blockquote>",
+        "app_readme": "<h1>Syncthing</h1>\n<p><a href=\"https://syncthing.net/\">Syncthing</a> is a file synchronization program.</p>\n<p>At each startup of the application, the following settings are applied:</p>\n<ul>\n<li>Disable automatic upgrades</li>\n<li>Disable anonymous usage reporting</li>\n<li>Disable NAT traversal</li>\n<li>Disable global discovery</li>\n<li>Disable local discovery</li>\n<li>Disable relaying</li>\n<li>Disable announcing LAN addresses</li>\n</ul>\n<p>Additionally, the following defaults are set for new synthing \"folders\":</p>\n<ul>\n<li>Max total size of <code>xattr</code>: 10 MiB</li>\n<li>Max size per <code>xattr</code>: 2 MiB</li>\n<li>Enable <code>send</code> and <code>sync</code> of <code>xattr</code></li>\n<li>Enable <code>send</code> and <code>sync</code> of <code>ownership</code></li>\n</ul>",
+        "detailed_readme": "<h1>Syncthing</h1>\n<p><a href=\"https://syncthing.net/\">Syncthing</a> is a file synchronization program.</p>\n<p>At each startup of the application, the following settings are applied:</p>\n<ul>\n<li>Disable automatic upgrades</li>\n<li>Disable anonymous usage reporting</li>\n<li>Disable NAT traversal</li>\n<li>Disable global discovery</li>\n<li>Disable local discovery</li>\n<li>Disable relaying</li>\n<li>Disable announcing LAN addresses</li>\n</ul>\n<p>Additionally, the following defaults are set for new synthing \"folders\":</p>\n<ul>\n<li>Max total size of <code>xattr</code>: 10 MiB</li>\n<li>Max size per <code>xattr</code>: 2 MiB</li>\n<li>Enable <code>send</code> and <code>sync</code> of <code>xattr</code></li>\n<li>Enable <code>send</code> and <code>sync</code> of <code>ownership</code></li>\n</ul>",
         "changelog": null
     }
 }
