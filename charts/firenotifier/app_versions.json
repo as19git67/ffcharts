@@ -4,10 +4,10 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/ffcharts/ffcharts/charts/firenotifier/2023.12.4",
-        "last_update": "2023-12-15 16:55:37",
+        "last_update": "2023-12-16 17:14:03",
         "required_features": [
-            "definitions/timezone",
-            "normalize/ixVolume"
+            "normalize/ixVolume",
+            "definitions/timezone"
         ],
         "human_version": "2023.12.4_2023.12.4",
         "version": "2023.12.4",
@@ -51,15 +51,15 @@
             "groups": [
                 {
                     "name": "Configuration",
-                    "description": "Home Assistant application configuration"
+                    "description": "Fire Notifier application configuration"
                 },
                 {
                     "name": "Storage",
-                    "description": "Configure storage for homeassistant"
+                    "description": "Configure storage for firenotifier"
                 },
                 {
                     "name": "Networking",
-                    "description": "Networking Configuration for homeassistant"
+                    "description": "Networking Configuration for firenotifier"
                 },
                 {
                     "name": "Advanced DNS Settings",
@@ -91,6 +91,126 @@
                                 "description": "'Asia/Saigon' timezone"
                             }
                         ]
+                    }
+                },
+                {
+                    "variable": "minWaitMinutesToNotifySameGroup",
+                    "label": "Minimum wait time in minutes between notifications to same group",
+                    "group": "Configuration",
+                    "schema": {
+                        "type": "int",
+                        "min": 0,
+                        "max": 6000,
+                        "default": 2
+                    }
+                },
+                {
+                    "variable": "sms_client_id",
+                    "label": "TextAnywhere Client ID",
+                    "group": "Configuration",
+                    "schema": {
+                        "type": "string"
+                    }
+                },
+                {
+                    "variable": "sms_client_secret",
+                    "label": "TextAnywhere Client Password",
+                    "group": "Configuration",
+                    "schema": {
+                        "type": "string",
+                        "private": true
+                    }
+                },
+                {
+                    "variable": "sms_validity_hours",
+                    "label": "SMS validity hours",
+                    "group": "Configuration",
+                    "schema": {
+                        "type": "int",
+                        "min": 1,
+                        "max": 240,
+                        "default": 26
+                    }
+                },
+                {
+                    "variable": "sms_wait_for_status",
+                    "label": "Wait time in seconds until status of sent SMS gets retrieved",
+                    "group": "Configuration",
+                    "schema": {
+                        "type": "int",
+                        "min": 1,
+                        "max": 100000,
+                        "default": 600
+                    }
+                },
+                {
+                    "variable": "sms_sender_nr",
+                    "label": "SMS Sender Number (optional)",
+                    "group": "Configuration",
+                    "schema": {
+                        "type": "string"
+                    }
+                },
+                {
+                    "variable": "email_smtp_sender_email",
+                    "label": "Email Sender Address",
+                    "group": "Configuration",
+                    "schema": {
+                        "type": "string"
+                    }
+                },
+                {
+                    "variable": "email_smtp_username",
+                    "label": "SMTP Authentication Username",
+                    "group": "Configuration",
+                    "schema": {
+                        "type": "string"
+                    }
+                },
+                {
+                    "variable": "email_smtp_password",
+                    "label": "SMTP Authentication Password",
+                    "group": "Configuration",
+                    "schema": {
+                        "type": "string",
+                        "private": true
+                    }
+                },
+                {
+                    "variable": "email_smtp_use_ssl",
+                    "label": "Use SSL for SMTP connection",
+                    "group": "Configuration",
+                    "schema": {
+                        "type": "boolean",
+                        "required": true,
+                        "default": false
+                    }
+                },
+                {
+                    "variable": "email_smtp_server_host",
+                    "label": "SMTP server host",
+                    "group": "Configuration",
+                    "schema": {
+                        "type": "string"
+                    }
+                },
+                {
+                    "variable": "email_smtp_server_port",
+                    "label": "SMTP server port",
+                    "group": "Configuration",
+                    "schema": {
+                        "type": "int",
+                        "min": 1,
+                        "max": 65535,
+                        "default": 21
+                    }
+                },
+                {
+                    "variable": "email_postmaster_address",
+                    "label": "Postmaster Email address for status Email",
+                    "group": "Configuration",
+                    "schema": {
+                        "type": "string"
                     }
                 },
                 {
