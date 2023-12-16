@@ -4,7 +4,7 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/ffcharts/ffcharts/charts/firenotifier/2023.12.4",
-        "last_update": "2023-12-16 17:14:03",
+        "last_update": "2023-12-16 17:31:51",
         "required_features": [
             "normalize/ixVolume",
             "definitions/timezone"
@@ -153,7 +153,7 @@
                 },
                 {
                     "variable": "email_smtp_sender_email",
-                    "label": "Email Sender Address",
+                    "label": "Email Sender Address (The sender of the notification emails)",
                     "group": "Configuration",
                     "schema": {
                         "type": "string"
