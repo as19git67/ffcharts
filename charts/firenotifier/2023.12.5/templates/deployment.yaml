@@ -65,12 +65,12 @@ spec:
           env:
             {{ $envList := (default list .Values.environmentVariables) }}
             {{ $envList = mustAppend $envList (dict "name" "PORT_HTTPS" "value" "") }}
-            {{ $envList = mustAppend $envList (dict "name" "MIN_WAIT_MINUTES_TO_NOTIFY_SAME_GROUP" "value" (printf "%d" .Values.minWaitMinutesToNotifySameGroup)) }}
+            {{ $envList = mustAppend $envList (dict "name" "MIN_WAIT_MINUTES_TO_NOTIFY_SAME_GROUP" "value" (printf "%d" .Values.minWaitMinutesToNotifySameGroup | int)) }}
             {{ $envList = mustAppend $envList (dict "name" "SMS_CLIENT_ID" "value" .Values.sms_client_id) }}
             {{ $envList = mustAppend $envList (dict "name" "SMS_CLIENT_SECRET" "value" .Values.sms_client_secret) }}
             {{ $envList = mustAppend $envList (dict "name" "SMS_SENDER_NR" "value" .Values.sms_sender_nr) }}
-            {{ $envList = mustAppend $envList (dict "name" "SMS_VALIDITY_HOURS" "value" (printf "%d" .Values.sms_validity_hours)) }}
-            {{ $envList = mustAppend $envList (dict "name" "SMS_WAIT_FOR_STATUS" "value" (printf "%d" .Values.sms_wait_for_status)) }}
+            {{ $envList = mustAppend $envList (dict "name" "SMS_VALIDITY_HOURS" "value" (printf "%d" .Values.sms_validity_hours | int)) }}
+            {{ $envList = mustAppend $envList (dict "name" "SMS_WAIT_FOR_STATUS" "value" (printf "%d" .Values.sms_wait_for_status | int)) }}
             {{ $envList = mustAppend $envList (dict "name" "EMAIL_SMTP_SENDER_EMAIL" "value" .Values.email_smtp_sender_email) }}
             {{ $envList = mustAppend $envList (dict "name" "EMAIL_SMTP_USERNAME" "value" .Values.email_smtp_username) }}
             {{ $envList = mustAppend $envList (dict "name" "EMAIL_SMTP_PASSWORD" "value" .Values.email_smtp_password) }}
