@@ -1,6 +1,8 @@
 groups:
   - name: "Configuration"
     description: "Fire Notifier application configuration"
+  - name: "Notification"
+    description: "Notification targets configuration"
   - name: "Storage"
     description: "Configure storage for firenotifier"
   - name: "Networking"
@@ -21,7 +23,7 @@ questions:
 
   - variable: minWaitMinutesToNotifySameGroup
     label: Minimum wait time in minutes between notifications to same group
-    group: "Configuration"
+    group: "Notification"
     schema:
       type: int
       min: 0
@@ -30,20 +32,20 @@ questions:
 
   - variable: sms_client_id
     label: TextAnywhere Client ID
-    group: "Configuration"
+    group: "Notification"
     schema:
       type: string
 
   - variable: sms_client_secret
     label: TextAnywhere Client Password
-    group: "Configuration"
+    group: "Notification"
     schema:
       type: string
       private: true
 
   - variable: sms_validity_hours
     label: SMS validity hours
-    group: "Configuration"
+    group: "Notification"
     schema:
       type: int
       min: 1
@@ -52,7 +54,7 @@ questions:
 
   - variable: sms_wait_for_status
     label: Wait time in seconds until status of sent SMS gets retrieved
-    group: "Configuration"
+    group: "Notification"
     schema:
       type: int
       min: 1
@@ -61,29 +63,29 @@ questions:
 
   - variable: sms_sender_nr
     label: SMS Sender Number (optional)
-    group: "Configuration"
+    group: "Notification"
     schema:
       type: string
 
   - variable: email_smtp_sender_email
     label: Email Sender Address (The sender of the notification emails)
-    group: "Configuration"
+    group: "Notification"
     schema:
       type: string
   - variable: email_smtp_username
     label: SMTP Authentication Username
-    group: "Configuration"
+    group: "Notification"
     schema:
       type: string
   - variable: email_smtp_password
     label: SMTP Authentication Password
-    group: "Configuration"
+    group: "Notification"
     schema:
       type: string
       private: true
   - variable: email_smtp_use_ssl
     label: Use SSL for SMTP connection
-    group: "Configuration"
+    group: "Notification"
     schema:
       type: boolean
       required: true
@@ -91,12 +93,12 @@ questions:
 
   - variable: email_smtp_server_host
     label: SMTP server host
-    group: "Configuration"
+    group: "Notification"
     schema:
       type: string
   - variable: email_smtp_server_port
     label: SMTP server port
-    group: "Configuration"
+    group: "Notification"
     schema:
       type: int
       min: 1
@@ -104,7 +106,7 @@ questions:
       default: 21
   - variable: email_postmaster_address
     label: Postmaster Email address for status Email
-    group: "Configuration"
+    group: "Notification"
     schema:
       type: string
 
@@ -151,7 +153,7 @@ questions:
                 label: "Enable Custom Host Path for firenotifier Recipients Configuration Storage Volume"
                 schema:
                   type: boolean
-                  default: false
+                  default: true
                   show_subquestions_if: true
                   subquestions:
                     - variable: hostPath
