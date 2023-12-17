@@ -65,7 +65,7 @@ spec:
           env:
             {{ $envList := (default list .Values.environmentVariables) }}
             {{ $envList = mustAppend $envList (dict "name" "PORT_HTTPS" "value" "") }}
-            {{ $envList = mustAppend $envList (dict "name" "MIN_WAIT_MINUTES_TO_NOTIFY_SAME_GROUP" "value" (.Values.minWaitMinutesToNotifySameGroup | int))) }}
+            {{ $envList = mustAppend $envList (dict "name" "MIN_WAIT_MINUTES_TO_NOTIFY_SAME_GROUP" "value" (printf "%d" (.Values.minWaitMinutesToNotifySameGroup | int))) }}
             {{ $envList = mustAppend $envList (dict "name" "SMS_CLIENT_ID" "value" .Values.sms_client_id) }}
             {{ $envList = mustAppend $envList (dict "name" "SMS_CLIENT_SECRET" "value" .Values.sms_client_secret) }}
             {{ $envList = mustAppend $envList (dict "name" "SMS_SENDER_NR" "value" .Values.sms_sender_nr) }}
