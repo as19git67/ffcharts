@@ -1,9 +1,9 @@
 name: firenotifier
 description: Notification service
 type: application
-version: 2023.12.8
+version: 2023.12.9
 apiVersion: v2
-appVersion: 2023.12.8
+appVersion: 2023.12.9
 kubeVersion: ">=1.16.0-0"
 maintainers:
   - name: as19git67
