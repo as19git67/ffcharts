@@ -64,7 +64,7 @@ spec:
             successThreshold: 1
           env:
             {{ $envList := (default list .Values.environmentVariables) }}
-            {{ $envList = mustAppend $envList (dict "name" "TZ" "value" .Values.timezone) }}
+            {{ $envList = mustAppend $envList (dict "name" "TZ" "value" .Values.TZ) }}
             {{ $envList = mustAppend $envList (dict "name" "PUID" "value" (printf "%d" (.Values.ownerUID | int))) }}
             {{ $envList = mustAppend $envList (dict "name" "PGID" "value" (printf "%d" (.Values.ownerGID | int))) }}
             {{ $envList = mustAppend $envList (dict "name" "PORT_HTTPS" "value" "") }}
