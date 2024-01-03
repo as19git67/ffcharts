@@ -64,6 +64,9 @@ spec:
             successThreshold: 1
           env:
             {{ $envList := (default list .Values.environmentVariables) }}
+            {{ $envList = mustAppend $envList (dict "name" "TZ" "value" .Values.timezone) }}
+            {{ $envList = mustAppend $envList (dict "name" "PUID" "value" (printf "%d" (.Values.ownerUID | int))) }}
+            {{ $envList = mustAppend $envList (dict "name" "PGID" "value" (printf "%d" (.Values.ownerGID | int))) }}
             {{ $envList = mustAppend $envList (dict "name" "PORT_HTTPS" "value" "") }}
             {{ $envList = mustAppend $envList (dict "name" "MIN_WAIT_MINUTES_TO_NOTIFY_SAME_GROUP" "value" (printf "%d" (.Values.minWaitMinutesToNotifySameGroup | int))) }}
             {{ $envList = mustAppend $envList (dict "name" "SMS_CLIENT_ID" "value" .Values.sms_client_id) }}
@@ -78,9 +81,6 @@ spec:
             {{ $envList = mustAppend $envList (dict "name" "EMAIL_SMTP_SERVER_HOST" "value" .Values.email_smtp_server_host) }}
             {{ $envList = mustAppend $envList (dict "name" "EMAIL_SMTP_SERVER_PORT" "value" (printf "%d" (.Values.email_smtp_server_port | int))) }}
             {{ $envList = mustAppend $envList (dict "name" "EMAIL_POSTMASTER_ADDRESS" "value" .Values.email_postmaster_address) }}
-            {{ $envList = mustAppend $envList (dict "name" "XXXSSL_CERT_SUBJ" "value" "") }}
-            {{ $envList = mustAppend $envList (dict "name" "PUID" "value" (printf "%d" (.Values.ownerUID | int))) }}
-            {{ $envList = mustAppend $envList (dict "name" "PGID" "value" (printf "%d" (.Values.ownerGID | int))) }}
             {{ include "common.containers.environmentVariables" (dict "environmentVariables" $envList) | nindent 12 }}
       {{ include "common.networking.dnsConfiguration" .Values | nindent 6 }}
       volumes: {{ include "common.storage.configureAppVolumes" .Values | nindent 8 }}
