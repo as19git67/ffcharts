@@ -1,23 +1,23 @@
 {
-    "2023.12.9": {
+    "2024.1.2": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/ffcharts/ffcharts/charts/firenotifier/2023.12.9",
-        "last_update": "2023-12-17 13:22:30",
+        "location": "/__w/ffcharts/ffcharts/charts/firenotifier/2024.1.2",
+        "last_update": "2024-01-03 11:38:38",
         "required_features": [
             "normalize/ixVolume",
             "definitions/timezone"
         ],
-        "human_version": "2023.12.9_2023.12.9",
-        "version": "2023.12.9",
+        "human_version": "2024.1.2_2024.1.2",
+        "version": "2024.1.2",
         "chart_metadata": {
             "name": "firenotifier",
             "description": "Notification service",
             "type": "application",
-            "version": "2023.12.9",
+            "version": "2024.1.2",
             "apiVersion": "v2",
-            "appVersion": "2023.12.9",
+            "appVersion": "2024.1.2",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
