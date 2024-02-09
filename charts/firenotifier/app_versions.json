@@ -1,23 +1,23 @@
 {
-    "2024.1.5": {
+    "2024.2.9": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/ffcharts/ffcharts/charts/firenotifier/2024.1.5",
-        "last_update": "2024-01-03 12:18:46",
+        "location": "/__w/ffcharts/ffcharts/charts/firenotifier/2024.2.9",
+        "last_update": "2024-02-09 08:02:59",
         "required_features": [
-            "normalize/ixVolume",
-            "definitions/timezone"
+            "definitions/timezone",
+            "normalize/ixVolume"
         ],
-        "human_version": "2024.1.5_2024.1.5",
-        "version": "2024.1.5",
+        "human_version": "2024.2.9_2024.2.9",
+        "version": "2024.2.9",
         "chart_metadata": {
             "name": "firenotifier",
             "description": "Notification service",
             "type": "application",
-            "version": "2024.1.5",
+            "version": "2024.2.9",
             "apiVersion": "v2",
-            "appVersion": "2024.1.5",
+            "appVersion": "2024.2.9",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
@@ -370,7 +370,7 @@
             ]
         },
         "app_readme": "<p>Notifier App for TrueNAS</p>",
-        "detailed_readme": "<h1>firenotifier</h1>\n<p>firenotifier is a notification server that gets triggered by doing a POST call to a REST api. The POST data\nhas a group id and a number of attributes that are used to create the notification message.\nThe notification message then gets sent via SMS or Email to all recipients of the specified group.</p>\n<h2>Introduction</h2>\n<p>This chart bootstraps an firenotifier deployment on a <a href=\"http://kubernetes.io\">Kubernetes</a> cluster using the <a href=\"https://helm.sh\">Helm</a> package manager.</p>\n<h2>Configuration</h2>\n<p>tbd</p>",
+        "detailed_readme": "<h1>firenotifier</h1>\n<p>firenotifier is a notification server that gets triggered by doing a POST call to a REST api. The POST data\nhas a group id and a number of attributes that are used to create the notification message.\nThe notification message then gets sent via SMS or Email to all recipients of the specified group.</p>\n<h2>Introduction</h2>\n<p>This chart bootstraps a firenotifier deployment on a <a href=\"http://kubernetes.io\">Kubernetes</a> cluster using the <a href=\"https://helm.sh\">Helm</a> package manager.</p>\n<h2>Configuration</h2>\n<p>tbd</p>",
         "changelog": null
     }
 }
