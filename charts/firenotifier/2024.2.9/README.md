@@ -6,7 +6,7 @@ The notification message then gets sent via SMS or Email to all recipients of th
 
 ## Introduction
 
-This chart bootstraps an firenotifier deployment on a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
+This chart bootstraps a firenotifier deployment on a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
 
 ## Configuration
 
